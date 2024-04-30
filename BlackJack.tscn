@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxvfdqr74mmpf"]
+
+[ext_resource type="Texture2D" uid="uid://cb4s5yt3sxb8g" path="res://icon.svg" id="1_i0032"]
+[ext_resource type="Script" path="res://BlackJack.gd" id="2_gcnat"]
+[ext_resource type="Resource" uid="uid://bu57rxd7xi6lf" path="res://Card Data.tres" id="3_qegej"]
+[ext_resource type="Texture2D" uid="uid://crwcpgkwh1aao" path="res://ace_of_clubs.jpg" id="4_2fj2y"]
+[ext_resource type="Script" path="res://Card_Data.gd" id="5_ftpb6"]
+[ext_resource type="PackedScene" uid="uid://difb3gleq78ee" path="res://empty_card.tscn" id="6_svhe8"]
+
+[sub_resource type="Resource" id="Resource_l3wmo"]
+resource_local_to_scene = true
+script = ExtResource("5_ftpb6")
+Card_Name = "AceOfClubs"
+Card_value = 10
+Card_Image = ExtResource("4_2fj2y")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(580, 525)
+texture = ExtResource("1_i0032")
+script = ExtResource("2_gcnat")
+Deck = [ExtResource("3_qegej"), SubResource("Resource_l3wmo")]
+Empty_card = ExtResource("6_svhe8")
+
+[node name="Button" type="Button" parent="Sprite2D"]
+offset_left = -65.0
+offset_top = 75.0
+offset_right = -57.0
+offset_bottom = 83.0
+text = "Hit
+"
+
+[node name="Button2" type="Button" parent="Sprite2D"]
+offset_left = 4.0
+offset_top = 76.0
+offset_right = 57.0
+offset_bottom = 107.0
+text = "Stand
+"

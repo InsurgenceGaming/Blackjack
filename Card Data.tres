@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://bu57rxd7xi6lf"]
+
+[ext_resource type="Script" path="res://Card_Data.gd" id="1_kde7f"]
+[ext_resource type="Texture2D" uid="uid://cb4s5yt3sxb8g" path="res://icon.svg" id="1_s34mp"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_kde7f")
+Card_Name = "AceOfHearts"
+Card_value = 10
+Card_Image = ExtResource("1_s34mp")
