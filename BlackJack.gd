@@ -31,71 +31,44 @@ var texture_ref = preload("res://icon.svg")
 # Called when the node enters the scene tree for the first time.
 var Random_cards = null
 func _ready():
-	#for texture_load in cardTexture:
-		#load(texture_load)
 	for suit in suits:
 		for rank in ranks:
 			var cardname = rank + "_of_" + suit
 			Card_name.append(cardname)
-	print(Card_name)
-	#print("I am ready")
-	#print(Random_cards)
 	
 	for card in 52:
 		var new_resource = CardData.new()
-		if card in range(1,13):
-			new_resource.Card_Name = Card_name[card]
-			print(cardTexture[card])
-			new_resource.Card_Image = load(cardTexture[card])
-			print(new_resource.Card_Name)
-			if "Ace" in new_resource.Card_Name:
-				new_resource.Card_value = 11
-				print(new_resource.Card_value)
-			elif card % 13 +1 >= 11:
-				new_resource.Card_value =10
-				print(new_resource.Card_value)
-			else: 
-				new_resource.Card_value = card %  13 + 1
-				print(new_resource.Card_value)
-			#i need to put all the card names in a table and all the card textures in another table
+		new_resource.Card_Name = Card_name[card]
+		new_resource.Card_Image = load(cardTexture[card])
+		if "Ace" in new_resource.Card_Name:
+			new_resource.Card_value = 11
+		elif card % 13 +1 >= 11:
+			new_resource.Card_value =10
+		else: 
+			new_resource.Card_value = card %  13 + 1
+
+
 
 		Deck.append(new_resource)
 	Random_cards = Deck.duplicate()
-	game_start(2)
-	#print(Deck)
-	#Instance_card.card_data = random_suit
-	#get_node(".").add_child(Instance_card)
-	#Instance_card.global_position = Vector2(213,161)
-	#print(random_suit.Card_Name)
-	#Instance_card.card_data = random_suit
-	#Instance_card.card_data.Card_Name = random_suit.CardData.Card_Name
-
-#func _process(delta):
-	#if Input.is_key_pressed(KEY_SPACE):
-		#game_start(6)
-
-
+	print(Random_cards)
+	game_start(52)
 
 func game_start(players:int):
-	var CardPos = get_parent().position + Vector2(-122,-140)
+	var CardPos = get_parent().position + Vector2(-580,-140)
 	for ply in players:
-		#print("I am a player")
-		var random_suit = Random_cards.pick_random()
+		var random_suit = Random_cards[0]
 		
 		var Instance_card = Empty_card.instantiate()
 		Instance_card.card_data = random_suit
 		get_node(".").add_child(Instance_card)
 		Instance_card.position = CardPos
-		#print(random_suit.Card_Name)
 		Instance_card.card_data = random_suit
-		CardPos = CardPos + Vector2(122,0)
+		CardPos = CardPos + Vector2(40,0)
+		Random_cards.remove_at(0)
+
 		
-	##print(CardPos)
 
 func card_spawn():
 	pass
 
-		
-## Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-	#pass
