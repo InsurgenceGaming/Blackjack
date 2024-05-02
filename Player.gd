@@ -1,27 +1,38 @@
 extends Sprite2D
 
 
-var card_total :int
+@export var control_node : Node2D
+var _card_total :int
 var my_turn = false
 @onready var hit_button =$Button
 @onready var stand_button = $Button2
+func _ready():
+	print(self)
 func _process(delta):
-	if card_total > 21:
-		get_node("/root/Control").Next_player()
+	_card_total = total_value()
+	if _card_total > 21:
+		control_node.Next_player()
 	if my_turn:
 		hit_button.disabled = false
 		stand_button.disabled = false
+		print(_card_total)
 	else:
 		hit_button.disabled = true
 		stand_button.disabled = true
-
+	
+func total_value():
+	var total_card = 0
+	for card in get_children():
+		if card.is_in_group("Card"):
+			total_card += card.my_value
+	return total_card
 func _on_button_pressed():
-	get_node("/root/Control").card_spawn(self)
+	control_node.card_spawn(self)
 	print("I want a new card")
 	
 
 
 
 func _on_button_2_pressed():
-	get_node("/root/Control").Next_player()
+	control_node.Next_player()
 	print("I dont want a new card")

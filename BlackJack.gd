@@ -73,7 +73,7 @@ func card_spawn(card_owner):
 	Instance_card.position = CardPos
 	Instance_card.card_data = random_suit
 	card_owner.add_child(Instance_card)
-	card_owner.card_total += Instance_card.my_value
+	
 	print(CardPos)
 	CardPos = CardPos + Vector2(45,0)
 	Random_cards.erase(random_suit)
@@ -83,14 +83,14 @@ func initialized():
 	active_player = TurnManager.Players[0]
 	active_player.modulate = Color(0,1,0)
 	active_player.my_turn = true
-	print(active_player)
 func Next_player():
-	var  new_index : int =( active_player.get_index()+1) % get_child_count()
 	active_player.my_turn = false
+	print(active_player,active_player.my_turn)
+	var  new_index : int =( active_player.get_index()+1) % get_child_count()
 	active_player = get_child(new_index)
 	active_player.my_turn = true
 	active_player.modulate = Color(1,0,0)
-	print(new_index)
+	print("the current player is ", active_player , "at " , str(Time.get_time_dict_from_system()) )
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_right"):

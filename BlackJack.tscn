@@ -8,8 +8,10 @@
 script = ExtResource("2_gcnat")
 Empty_card = ExtResource("6_svhe8")
 
-[node name="Sprite2D" parent="." instance=ExtResource("3_lvnj0")]
+[node name="Sprite2D" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
 position = Vector2(123, 309)
+control_node = NodePath("..")
 
-[node name="Sprite2D2" parent="." instance=ExtResource("3_lvnj0")]
+[node name="Sprite2D2" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
 position = Vector2(470, 253)
+control_node = NodePath("..")
