@@ -6,16 +6,17 @@ var _card_total :int
 var my_turn = false
 @onready var hit_button =$Button
 @onready var stand_button = $Button2
+signal End_turn()
 func _ready():
 	print(self)
 func _process(delta):
 	_card_total = total_value()
-	if _card_total > 21:
-		control_node.Next_player()
 	if my_turn:
 		hit_button.disabled = false
 		stand_button.disabled = false
 		print(_card_total)
+		if _card_total > 21:
+			control_node.Next_player()
 	else:
 		hit_button.disabled = true
 		stand_button.disabled = true
