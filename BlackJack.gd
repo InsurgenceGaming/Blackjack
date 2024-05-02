@@ -1,5 +1,4 @@
-extends Sprite2D
-
+extends Node2D
 @export var Deck = []
 @export var Empty_card : PackedScene
 var cardTexture = [
@@ -25,12 +24,18 @@ var cardTexture = [
 	"res://Sprites/card_spades_K.png"
 ]
 var Card_name = []
+var active_player
 var suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
 var ranks = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
-var texture_ref = preload("res://icon.svg")
 # Called when the node enters the scene tree for the first time.
 var Random_cards = null
 func _ready():
+	var player_nodes = get_tree().get_nodes_in_group("Player")
+	for player_node in player_nodes:
+		TurnManager.Players.append(player_node)
+	
+	print(TurnManager.Players)
+	
 	for suit in suits:
 		for rank in ranks:
 			var cardname = rank + "_of_" + suit
@@ -46,29 +51,47 @@ func _ready():
 			new_resource.Card_value =10
 		else: 
 			new_resource.Card_value = card %  13 + 1
-
-
-
 		Deck.append(new_resource)
 	Random_cards = Deck.duplicate()
-	print(Random_cards)
-	game_start(52)
+	#print(Random_cards)
+	game_start(TurnManager.Players.size())
+	initialized()
+var CardPos
+func game_start(Players:int):
+	for ply in TurnManager.Players:
+		CardPos = position + Vector2(-30,-100)
+		for test in range(2):
+			card_spawn(ply)
+			
 
-func game_start(players:int):
-	var CardPos = get_parent().position + Vector2(-580,-140)
-	for ply in players:
-		var random_suit = Random_cards[0]
-		
-		var Instance_card = Empty_card.instantiate()
-		Instance_card.card_data = random_suit
-		get_node(".").add_child(Instance_card)
-		Instance_card.position = CardPos
-		Instance_card.card_data = random_suit
-		CardPos = CardPos + Vector2(40,0)
-		Random_cards.remove_at(0)
 
-		
 
-func card_spawn():
+func card_spawn(card_owner):
+	var random_suit = Random_cards.pick_random()
+	var Instance_card = Empty_card.instantiate()
+	Instance_card.card_data = random_suit
+	Instance_card.position = CardPos
+	Instance_card.card_data = random_suit
+	card_owner.add_child(Instance_card)
+	card_owner.card_total += Instance_card.my_value
+	print(CardPos)
+	CardPos = CardPos + Vector2(45,0)
+	Random_cards.erase(random_suit)
 	pass
 
+func initialized():
+	active_player = TurnManager.Players[0]
+	active_player.modulate = Color(0,1,0)
+	active_player.my_turn = true
+	print(active_player)
+func Next_player():
+	var  new_index : int =( active_player.get_index()+1) % get_child_count()
+	active_player.my_turn = false
+	active_player = get_child(new_index)
+	active_player.my_turn = true
+	active_player.modulate = Color(1,0,0)
+	print(new_index)
+
+func _process(delta):
+	if Input.is_action_just_pressed("ui_right"):
+		Next_player()
