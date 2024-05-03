@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxvfdqr74mmpf"]
+[gd_scene load_steps=5 format=3 uid="uid://dxvfdqr74mmpf"]
 
 [ext_resource type="Script" path="res://BlackJack.gd" id="2_gcnat"]
 [ext_resource type="PackedScene" uid="uid://d44ed54c4mnf" path="res://Player.tscn" id="3_lvnj0"]
+[ext_resource type="Script" path="res://Dealer.gd" id="4_hrddm"]
 [ext_resource type="PackedScene" uid="uid://difb3gleq78ee" path="res://empty_card.tscn" id="6_svhe8"]
 
 [node name="Control" type="Node2D"]
@@ -14,4 +15,19 @@ control_node = NodePath("..")
 
 [node name="Sprite2D2" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
 position = Vector2(470, 253)
+control_node = NodePath("..")
+
+[node name="Dealer" type="Sprite2D" parent="." groups=["Player"]]
+script = ExtResource("4_hrddm")
+
+[node name="Sprite2D3" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
+position = Vector2(179, 112)
+control_node = NodePath("..")
+
+[node name="Sprite2D4" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
+position = Vector2(519, 521)
+control_node = NodePath("..")
+
+[node name="Sprite2D5" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
+position = Vector2(810, 264)
 control_node = NodePath("..")

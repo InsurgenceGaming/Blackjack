@@ -32,9 +32,14 @@ var Random_cards = null
 func _ready():
 	var player_nodes = get_tree().get_nodes_in_group("Player")
 	for player_node in player_nodes:
-		TurnManager.Players.append(player_node)
-	
+		if TurnManager.Players.size() >= get_tree().get_nodes_in_group("Player").size() -1:
+			TurnManager.Players.append(player_node)
+		else: 
+			TurnManager.Players.append(player_node)
+
 	print(TurnManager.Players)
+	#if player_nodes == get_tree().get_nodes_in_group("Dealer"):
+		#TurnManager.Players.append(get_tree().get_nodes_in_group("Dealer"))
 	
 	for suit in suits:
 		for rank in ranks:
@@ -61,16 +66,16 @@ func game_start(Players:int):
 	for ply in TurnManager.Players:
 		CardPos = position + Vector2(-30,-100)
 		for test in range(2):
-			card_spawn(ply)
+			card_spawn(ply,CardPos)
 			
 
 
 
-func card_spawn(card_owner):
+func card_spawn(card_owner,card_pos):
 	var random_suit = Random_cards.pick_random()
 	var Instance_card = Empty_card.instantiate()
 	Instance_card.card_data = random_suit
-	Instance_card.position = CardPos
+	Instance_card.position = card_pos
 	Instance_card.card_data = random_suit
 	card_owner.add_child(Instance_card)
 	
