@@ -32,12 +32,10 @@ var Random_cards = null
 func _ready():
 	var player_nodes = get_tree().get_nodes_in_group("Player")
 	for player_node in player_nodes:
-		if TurnManager.Players.size() >= get_tree().get_nodes_in_group("Player").size() -1:
-			TurnManager.Players.append(player_node)
-		else: 
-			TurnManager.Players.append(player_node)
-
-	print(TurnManager.Players)
+		TurnManager.Players.append(player_node)
+	for player in get_tree().get_nodes_in_group("Dealer"):
+		TurnManager.Players.append(player)
+	
 	#if player_nodes == get_tree().get_nodes_in_group("Dealer"):
 		#TurnManager.Players.append(get_tree().get_nodes_in_group("Dealer"))
 	
@@ -88,11 +86,15 @@ func initialized():
 	active_player = TurnManager.Players[0]
 	active_player.modulate = Color(0,1,0)
 	active_player.my_turn = true
+	print(TurnManager.Players.size())
+
+
 func Next_player():
 	active_player.my_turn = false
 	print(active_player,active_player.my_turn)
-	var  new_index : int =( active_player.get_index()+1) % get_child_count()
-	active_player = get_child(new_index)
+	var  new_index : int =wrapi(TurnManager.Players.find(active_player)+1, 0, TurnManager.Players.size())
+	active_player = TurnManager.Players[new_index]
+	print(active_player)
 	active_player.my_turn = true
 	active_player.modulate = Color(1,0,0)
 	print("the current player is ", active_player , "at " , str(Time.get_time_dict_from_system()) )

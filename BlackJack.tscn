@@ -10,24 +10,24 @@ script = ExtResource("2_gcnat")
 Empty_card = ExtResource("6_svhe8")
 
 [node name="Sprite2D" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
-position = Vector2(123, 309)
+position = Vector2(254, 318)
 control_node = NodePath("..")
 
 [node name="Sprite2D2" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
-position = Vector2(470, 253)
+position = Vector2(601, 262)
 control_node = NodePath("..")
 
-[node name="Dealer" type="Sprite2D" parent="." groups=["Player"]]
+[node name="Dealer" type="Sprite2D" parent="." groups=["Dealer"]]
 script = ExtResource("4_hrddm")
 
 [node name="Sprite2D3" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
-position = Vector2(179, 112)
+position = Vector2(310, 121)
 control_node = NodePath("..")
 
 [node name="Sprite2D4" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
-position = Vector2(519, 521)
+position = Vector2(650, 530)
 control_node = NodePath("..")
 
 [node name="Sprite2D5" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
-position = Vector2(810, 264)
+position = Vector2(941, 273)
 control_node = NodePath("..")
