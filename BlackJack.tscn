@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxvfdqr74mmpf"]
+[gd_scene load_steps=6 format=3 uid="uid://dxvfdqr74mmpf"]
 
 [ext_resource type="Script" path="res://BlackJack.gd" id="2_gcnat"]
 [ext_resource type="PackedScene" uid="uid://d44ed54c4mnf" path="res://Player.tscn" id="3_lvnj0"]
+[ext_resource type="Texture2D" uid="uid://cb4s5yt3sxb8g" path="res://icon.svg" id="4_5848d"]
 [ext_resource type="Script" path="res://Dealer.gd" id="4_hrddm"]
 [ext_resource type="PackedScene" uid="uid://difb3gleq78ee" path="res://empty_card.tscn" id="6_svhe8"]
 
@@ -10,24 +11,25 @@ script = ExtResource("2_gcnat")
 Empty_card = ExtResource("6_svhe8")
 
 [node name="Sprite2D" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
-position = Vector2(254, 318)
+position = Vector2(124, 507)
 control_node = NodePath("..")
 
 [node name="Sprite2D2" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
-position = Vector2(601, 262)
+position = Vector2(851, 541)
 control_node = NodePath("..")
 
-[node name="Dealer" type="Sprite2D" parent="." groups=["Dealer"]]
+[node name="Dealer" type="Sprite2D" parent="." node_paths=PackedStringArray("control_node") groups=["Dealer"]]
+position = Vector2(512, 226)
+texture = ExtResource("4_5848d")
 script = ExtResource("4_hrddm")
+control_node = NodePath("..")
 
 [node name="Sprite2D3" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
-position = Vector2(310, 121)
+position = Vector2(258, 293)
 control_node = NodePath("..")
 
 [node name="Sprite2D4" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
-position = Vector2(650, 530)
+position = Vector2(713, 363)
 control_node = NodePath("..")
 
-[node name="Sprite2D5" parent="." node_paths=PackedStringArray("control_node") instance=ExtResource("3_lvnj0")]
-position = Vector2(941, 273)
-control_node = NodePath("..")
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]

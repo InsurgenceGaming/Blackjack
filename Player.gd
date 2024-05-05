@@ -7,8 +7,7 @@ var my_turn = false
 @onready var hit_button =$Button
 @onready var stand_button = $Button2
 
-func _ready():
-	pass
+
 func _process(delta):
 	_card_total = total_value()
 	if my_turn:
