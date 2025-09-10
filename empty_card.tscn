@@ -1,10 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://difb3gleq78ee"]
 
-<<<<<<< Updated upstream
-[ext_resource type="Script" uid="uid://t2lldcn6xh8p" path="res://card.gd" id="1_8gaff"]
-=======
-[ext_resource type="Script" uid="uid://wmx8er42vxm5" path="res://card.gd" id="1_8gaff"]
->>>>>>> Stashed changes
+[ext_resource type="Script" path="res://card.gd" id="1_8gaff"]
 
 [node name="Empty_card" type="Sprite2D" groups=["Card"]]
 position = Vector2(65, 78)

@@ -27,14 +27,19 @@ var Card_name = []
 var active_player
 var suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
 var ranks = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
+var dealer = null
 # Called when the node enters the scene tree for the first time.
 var Random_cards = null
 func _ready():
 	var player_nodes = get_tree().get_nodes_in_group("Player")
 	for player_node in player_nodes:
 		TurnManager.Players.append(player_node)
+	for player in get_tree().get_nodes_in_group("Dealer"):
+		TurnManager.Players.append(player)
+		
 	
-	print(TurnManager.Players)
+	#if player_nodes == get_tree().get_nodes_in_group("Dealer"):
+		#TurnManager.Players.append(get_tree().get_nodes_in_group("Dealer"))
 	
 	for suit in suits:
 		for rank in ranks:
@@ -53,6 +58,7 @@ func _ready():
 			new_resource.Card_value = card %  13 + 1
 		Deck.append(new_resource)
 	Random_cards = Deck.duplicate()
+	Random_cards.shuffle()
 	#print(Random_cards)
 	game_start(TurnManager.Players.size())
 	initialized()
@@ -61,16 +67,16 @@ func game_start(Players:int):
 	for ply in TurnManager.Players:
 		CardPos = position + Vector2(-30,-100)
 		for test in range(2):
-			card_spawn(ply)
+			card_spawn(ply,CardPos)
 			
 
 
 
-func card_spawn(card_owner):
+func card_spawn(card_owner,card_pos):
 	var random_suit = Random_cards.pick_random()
 	var Instance_card = Empty_card.instantiate()
 	Instance_card.card_data = random_suit
-	Instance_card.position = CardPos
+	Instance_card.position = card_pos
 	Instance_card.card_data = random_suit
 	card_owner.add_child(Instance_card)
 	
@@ -81,17 +87,31 @@ func card_spawn(card_owner):
 
 func initialized():
 	active_player = TurnManager.Players[0]
-	active_player.modulate = Color(0,1,0)
 	active_player.my_turn = true
+	#print(TurnManager.Players.size())
+
+
 func Next_player():
 	active_player.my_turn = false
-	print(active_player,active_player.my_turn)
-	var  new_index : int =( active_player.get_index()+1) % get_child_count()
-	active_player = get_child(new_index)
+	#print(active_player,active_player.my_turn)
+	var  new_index : int =wrapi(TurnManager.Players.find(active_player)+1, 0, TurnManager.Players.size())
+	active_player = TurnManager.Players[new_index]
+	#print(new_index)
 	active_player.my_turn = true
-	active_player.modulate = Color(1,0,0)
-	print("the current player is ", active_player , "at " , str(Time.get_time_dict_from_system()) )
+	#print("the current player is ", active_player , "at " , str(Time.get_time_dict_from_system()) )
+	if new_index == 0:
+		Round_Over()
 
+func Round_Over():
+	
+	print("The game is over")
+	
+	for players in TurnManager.Players:
+		if players._card_total > TurnManager.Players[TurnManager.Players.size()-1]._card_total and players._card_total < 21:
+			print(players.name,"you win!")
+		
+
+	
 func _process(delta):
 	if Input.is_action_just_pressed("ui_right"):
 		Next_player()

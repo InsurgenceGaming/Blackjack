@@ -5,6 +5,8 @@ var Players = []
 
 func _ready():
 	print(get_tree().get_nodes_in_group("Player"))
+	
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.r
