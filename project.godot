@@ -11,7 +11,11 @@ config_version=5
 [application]
 
 config/name="BlackJack"
+<<<<<<< Updated upstream
 run/main_scene="res://BlackJack.tscn"
+=======
+run/main_scene="uid://xhd7n5vqe2x6"
+>>>>>>> Stashed changes
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

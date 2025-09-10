@@ -1,7 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://xhd7n5vqe2x6"]
 
 [ext_resource type="FontFile" uid="uid://beaowwk3s41ka" path="res://SuperMario256.ttf" id="1_gn1pd"]
+<<<<<<< Updated upstream
 [ext_resource type="Script" uid="uid://drk5hboctnh0o" path="res://Main Menu.gd" id="1_uvd5j"]
+=======
+[ext_resource type="Script" uid="uid://buft4wqelb080" path="res://Main Menu.gd" id="1_uvd5j"]
+>>>>>>> Stashed changes
 [ext_resource type="PackedScene" uid="uid://d44ed54c4mnf" path="res://Player.tscn" id="2_7vvc0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdrln"]
@@ -63,7 +67,7 @@ layout_mode = 2
 text = "Host"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Player.tscn")
+_spawnable_scenes = PackedStringArray("uid://d44ed54c4mnf")
 spawn_path = NodePath("..")
 
 [connection signal="pressed" from="BoxContainer/VBoxContainer/Connect" to="." method="_on_connect_pressed"]
