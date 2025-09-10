@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dxvfdqr74mmpf"]
 
-[ext_resource type="Script" path="res://BlackJack.gd" id="2_gcnat"]
+[ext_resource type="Script" uid="uid://c8amtaxl7e7r8" path="res://BlackJack.gd" id="2_gcnat"]
 [ext_resource type="PackedScene" uid="uid://d44ed54c4mnf" path="res://Player.tscn" id="3_lvnj0"]
 [ext_resource type="PackedScene" uid="uid://difb3gleq78ee" path="res://empty_card.tscn" id="6_svhe8"]
 
